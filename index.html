@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"/>
+    <meta name="description" content="A cool thing made with Glitch">
+
+    <title>Paint Pot Online</title>
+
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+    <link rel="icon" type="image/png" href="https://icons.iconarchive.com/icons/google/noto-emoji-objects/512/62911-paintbrush-icon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <!-- import the webpage's client-side javascript file -->
+   
+     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
+
+
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js" defer></script>
+    
+  </head>
+  <body>
+
+
+
+<div class="container">
+  <div class="col-sm-2">
+   <ul>
+<li><button class="btn btn-outline-info" id="select"> <i class="bi bi-hand-index-thumb"></i></button></li>
+<li><button class="btn btn-outline-info" id="draw"><i class="bi bi-brush"></i></button></li>
+<li><button class="btn btn-outline-info" onclick="addT()"><i class="bi bi-fonts"></i></button></li>
+<li><button class="btn btn-outline-info" id="delete"><i class="bi bi-trash"></i></button></li>
+<li><button class="btn btn-outline-info" id="clear"><i class="bi bi-file-earmark-plus"></i></button></li>
+   </ul>
+ </div>
+
+
+
+
+<div class="col-sm-10"><canvas id="paper" width="1000" height="700"  style="border-radius:6px;border:1px solid #0dcaf0;box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;"></canvas>
+</div>
+</div>
+
+   <!--  </div> -->
+  </body>
+</html>

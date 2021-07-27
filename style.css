@@ -1,0 +1,25 @@
+
+
+/* myy */
+
+.container>div {
+  float: left;
+}
+
+.col-sm-2>ul {
+  list-style: none;
+  text-align: center;
+}
+
+.col-sm-2>ul li {
+  margin: 8px;
+}
+
+.col-sm-2 button:hover i::before {
+  color: white;
+}
+.container {
+  float: left;
+  margin: 0 auto;
+  padding-top: 30px;
+}
