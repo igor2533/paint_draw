@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 
 let server = require('http').createServer(app);
-const PORT = 8080;
+const PORT = process.env.PORT;
 let io = require('socket.io')(server);
 
 let segments = [];
