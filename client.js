@@ -40,7 +40,7 @@ socket.on('addClientText', function(){
 canvas.isDrawingMode = false;
 date = new Date();
 myid = date.getMilliseconds();
-      var text = new fabric.IText('Itransition TEXT', { 
+      var text = new fabric.IText('To do! I will learn js', { 
   left: 40, 
   top: 50,
   id: myid,
@@ -50,11 +50,47 @@ myid = date.getMilliseconds();
 text.hasRotatingPoint = true;
 canvas.add(text).setActiveObject(text);
 })
+
+
+
+
+socket.on('addClientSimpleText', function(){
+  canvas.isDrawingMode = false;
+  date = new Date();
+  myid = date.getMilliseconds();
+        var text = new fabric.IText('Simple Text', { 
+    left: 40, 
+    top: 50,
+    fontSize:24,
+    id: myid,
+    fill:"#000000",
+
+  });
+  text.hasRotatingPoint = true;
+  canvas.add(text).setActiveObject(text);
+  })
+
+
+
+
+
+
+
+
+
 function addT(){
 batch = [];
   socket.emit('addServerText');
 
 }
+
+function addText(){
+  batch = [];
+    socket.emit('addServerSimpleText');
+  
+  }
+
+
 function deleteObjects(){
 	var activeObject = canvas.getActiveObject();
     //activeGroup = canvas.getActiveGroup();

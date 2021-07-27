@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 let server = require('http').createServer(app);
 const PORT = process.env.PORT;
+//const PORT = 8080;
 let io = require('socket.io')(server);
 let segments = [];
 let clients = 0;
@@ -15,6 +16,11 @@ socket.broadcast.emit("new_user");
 socket.on('addServerText', function(){
 io.sockets.emit('addClientText');
 })
+
+socket.on('addServerSimpleText', function(){
+  io.sockets.emit('addClientSimpleText');
+  })
+
 socket.on('moveTextServer', function(data){
 io.sockets.emit('moveTextClient', data);
   })
