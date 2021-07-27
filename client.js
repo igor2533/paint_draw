@@ -3,8 +3,6 @@ let socket = io();
 let brushSize = 5;
 let currentColor = '#000000';
 let batch = [];
-
-
 let canvas = new fabric.Canvas('paper');
 let line, triangle, origX, origY, isFreeDrawing = true;
 let isRectActive = false, isCircleActive = false, isArrowActive = false, activeColor = '#000000';
@@ -13,7 +11,6 @@ let $canvas = $("#paper");
 let w, h;
 w = 1200;
 h = 600;
-// var canvas = new fabric.Canvas('paper', { isDrawingMode: true });
 $("#select").click(function(){
     canvas.isDrawingMode = false;
 });
@@ -28,20 +25,9 @@ $("#delete").click(function(){
 $("#clear").click(function(){
   canvas.clear();
 });
-
-
-
-
-
 function initCanvas(canvas) {
-
-
-
-	
-	console.log('process init');
-
-
-   let aux = canvas;
+console.log('process init');
+  let aux = canvas;
     let json = aux.toJSON();
     let data = {
         w: w,
@@ -49,45 +35,10 @@ function initCanvas(canvas) {
         data: json
     };
     socket.emit('drawing', data);
-
-    
-
 }
-
-
-
-function sendCanvas(){
-
-  if(canvas.length > 0){
-    socket.emit('newCanvas', canvas);
-    //batch = [segment];
-    canvas = [];
-  }
-  
-}
-
-
-function keyPressed(){
-  if(keyCode === 32){
-    batch = [];
-    socket.emit('serverClear');
-  }
-}
-
-
-
-
-
-
-
-
-
-
 socket.on('addClientText', function(){
-
- canvas.isDrawingMode = false;
+canvas.isDrawingMode = false;
 date = new Date();
-  
 myid = date.getMilliseconds();
       var text = new fabric.IText('Itransition TEXT', { 
   left: 40, 
@@ -95,30 +46,15 @@ myid = date.getMilliseconds();
   id: myid,
   fill:"#FFFFFF",
   backgroundColor:"#cf9c1d",
-
-
-  
 });
 text.hasRotatingPoint = true;
 canvas.add(text).setActiveObject(text);
-
 })
-
-
-
-
-
-
-
 function addT(){
-
 batch = [];
   socket.emit('addServerText');
 
 }
-
-
-
 function deleteObjects(){
 	var activeObject = canvas.getActiveObject();
     //activeGroup = canvas.getActiveGroup();
@@ -127,115 +63,53 @@ function deleteObjects(){
             canvas.remove(activeObject);
         }
     }
-   
-}
-
-
-
-
-
-
-
-canvas.on({
   
-  'object:moving': function(i) {
-
+}
+canvas.on({
+ 'object:moving': function(i) {
 var pointer = canvas.getPointer(event.e);
   var posX = pointer.x;
   var posY = pointer.y;
     myid = canvas.getActiveObject().get('id');
-  
-
-  // mov_backg = canvas.getActiveObject().get('textBackgroundColor');
-  // mov_color = canvas.getActiveObject().get('fill')
-
-let segments = [x1 =  posX,  y1 = posY, id = myid];
-
-
-
-
+  let segments = [x1 =  posX,  y1 = posY, id = myid];
  socket.emit('moveTextServer',segments);
-
   },
-
-
-
   'text:changed': function(e) {
-
-
     myid = canvas.getActiveObject().get('id');
-
-
 let segments = [id =  myid,  text = e.target.text];
-
  socket.emit('editTextServer',segments);
  console.log('changed', e.target.text);
   },
-
-
-
-
-
    'object:added': function(i) {
-     
-if(canvas.isDrawingMode == true){
+ if(canvas.isDrawingMode == true){
       console.log('dragging');
 }
    }
  
 });
-
 socket.on('new_user', function(data){
-
-
  emitEvent();
     console.log('new client');
- 
-
-
-//emitEvent();
-
-})	
-
+ })	
 socket.on('moveTextClient', function(data){
-
-   
-  
       let segments = data;
-
     console.log(segments[0]+" ___"+segments[1]+"__"+segments[2]);
-  
-    canvas.forEachObject(function(obj) {
+      canvas.forEachObject(function(obj) {
     if (obj.id && obj.id === segments[2]) {
         obj.set({left:segments[0],top:segments[1]});
     canvas.renderAll();
-    
-    }
+       }
 });
-
-
 })
-
-
-
-
 socket.on('editTextClient', function(data){
-
-   
-  
       let segments = data;
-
     console.log("Text updated on: "+segments[1]+" id: "+segments[0]);
-  
-    canvas.forEachObject(function(obj) {
+      canvas.forEachObject(function(obj) {
     if (obj.id && obj.id === segments[0]) {
         obj.set({text:segments[1]});
     canvas.renderAll();
-    
-    }
+      }
 });
-
-
 })
 
 
