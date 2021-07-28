@@ -132,7 +132,7 @@ socket.on('moveTextClient', function(data){
     console.log(segments[0]+" ___"+segments[1]+"__"+segments[2]);
       canvas.forEachObject(function(obj) {
     if (obj.id && obj.id === segments[2]) {
-        obj.set({left:segments[0],top:segments[1]});
+        obj.set({x:segments[0],y:segments[1]});
     canvas.renderAll();
        }
 });
