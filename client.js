@@ -102,7 +102,7 @@ function deleteObjects(){
   
 }
 canvas.on({
- 'object:moving': function(i) {
+ 'object:moved': function(i) {
 var pointer = canvas.getPointer(event.e);
   var posX = pointer.x;
   var posY = pointer.y;
